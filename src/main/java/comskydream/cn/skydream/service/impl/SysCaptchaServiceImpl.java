@@ -35,7 +35,7 @@ public class SysCaptchaServiceImpl implements SysCaptchaService {
         String code = producer.createText();
         //生成验证码实体类，5分钟后过期
         SysCaptcha sysCaptcha = SysCaptcha.builder().code(code)
-                .uuid(UuidUtils.id())
+                .uuid(uuid)
                 .expireTime(DateUtils.add(5)).build();
         sysCaptchaMapper.insert(sysCaptcha);
         return producer.createImage(code);
