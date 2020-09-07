@@ -48,4 +48,11 @@ public interface SysUserMapper {
      */
     SysUser getOne(SysUser record);
 
+    /**
+     * 查询用户所有的菜单id
+     * @param userId
+     * @return
+     */
+    List<String> getAllMenuIds(String userId);
+
 }

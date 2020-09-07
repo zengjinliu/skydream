@@ -34,4 +34,9 @@ public class SysUserServiceImpl implements SysUserService {
         //TODO 查询用户的所欲去权限
         return null;
     }
+
+    @Override
+    public List<String> queryAllMenuIds(String userId) {
+        return sysUserMapper.getAllMenuIds(userId);
+    }
 }

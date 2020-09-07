@@ -32,4 +32,11 @@ public interface SysUserService {
      */
     Set<String> queryAllPermission(String userId);
 
+    /**
+     * 查询用户所有的菜单Id
+     * @param userId 用户id
+     * @return
+     */
+    List<String> queryAllMenuIds(String userId);
+
 }
