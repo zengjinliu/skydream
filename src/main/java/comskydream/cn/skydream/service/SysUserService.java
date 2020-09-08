@@ -1,6 +1,7 @@
 package comskydream.cn.skydream.service;
 
 import comskydream.cn.skydream.entity.SysUser;
+import comskydream.cn.skydream.model.PasswordVo;
 
 import java.util.List;
 import java.util.Set;
@@ -39,4 +40,9 @@ public interface SysUserService {
      */
     List<String> queryAllMenuIds(String userId);
 
+    /**
+     * 更新密码
+     * @param passwordVo
+     */
+    void updatePwd(PasswordVo passwordVo);
 }

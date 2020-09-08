@@ -29,10 +29,14 @@ public class ResultJson<T> {
         return resultJson;
     }
     public static <T> ResultJson<T> success(T data){
+        ResultJson<T>  resultJson = success();
+        resultJson.setDatas(data);
+        return resultJson;
+    }
+    public static <T> ResultJson<T> success(){
         ResultJson<T>  resultJson = new  ResultJson<T> ();
         resultJson.setCode(HttpStatus.OK.value());
         resultJson.setMsg(HttpStatus.OK.getReasonPhrase());
-        resultJson.setDatas(data);
         return resultJson;
     }
     public static <T> ResultJson<T> success(Integer code,String msg){

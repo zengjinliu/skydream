@@ -55,4 +55,9 @@ public interface SysUserMapper {
      */
     List<String> getAllMenuIds(String userId);
 
+    /**
+     * 查询用户的所有权限
+     * @param userId  用户ID
+     */
+    List<String> queryAllPerms(String userId);
 }
