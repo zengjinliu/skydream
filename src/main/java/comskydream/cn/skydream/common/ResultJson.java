@@ -28,29 +28,20 @@ public class ResultJson<T> {
         resultJson.setMsg(msg);
         return resultJson;
     }
-    public static <T> ResultJson<T> success(String msg){
+    public static <T> ResultJson<T> success(T data){
         ResultJson<T>  resultJson = new  ResultJson<T> ();
         resultJson.setCode(HttpStatus.OK.value());
-        resultJson.setMsg(msg);
-        return resultJson;
-    }
-    public static <T> ResultJson<T> success(String msg,T data){
-        ResultJson<T>  resultJson = new  ResultJson<T> ();
-        resultJson.setCode(HttpStatus.OK.value());
-        resultJson.setMsg(msg);
+        resultJson.setMsg(HttpStatus.OK.getReasonPhrase());
         resultJson.setDatas(data);
         return resultJson;
     }
     public static <T> ResultJson<T> success(Integer code,String msg){
+        //没有数据，只返回状态码和消息
         ResultJson<T>  resultJson = new  ResultJson<T> ();
         resultJson.setCode(code);
         resultJson.setMsg(msg);
         return resultJson;
     }
-    public static <T> ResultJson<T> success(Integer code,String msg,T data){
-        ResultJson<T> resultJson = success(code, msg);
-        resultJson.setDatas(data);
-        return resultJson;
-    }
+
 
 }

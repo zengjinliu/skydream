@@ -33,7 +33,5 @@ public class SysMenuVo {
 
     private String open;
 
-    private List<String> permissions;
-
-    private List<SysMenuVo> list;
+    private List<SysMenuVo> childs;
 }

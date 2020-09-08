@@ -62,7 +62,7 @@ public class SysLoginController {
         }
         //生成token 并存入数据库(也可以存入第三方缓存数据库redis)
         String token = sysUserTokenService.createToken(user.getUserId());
-        return ResultJson.success("登录成功",token);
+        return ResultJson.success(token);
     }
 
     @RequestMapping("/logout")

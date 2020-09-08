@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import java.util.List;
 
 /**
  * 菜单管理
@@ -58,5 +59,8 @@ public class SysMenu {
      */
     private Integer orderNum;
 
-   
+    /**
+     * 子级菜单
+     */
+    private List<SysMenu> childs;
 }

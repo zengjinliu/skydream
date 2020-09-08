@@ -1,7 +1,6 @@
 package comskydream.cn.skydream.common;
 
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -37,7 +36,7 @@ public class PageModel {
     /**
      * 总记录数据
      */
-    private Integer total;
+    private long total;
 
     /**
      * 总页数
@@ -54,5 +53,18 @@ public class PageModel {
             this.page = 1;
             this.rows = 20;
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("PageModel{");
+        sb.append("page=").append(page);
+        sb.append(", rows=").append(rows);
+        sb.append(", size=").append(size);
+        sb.append(", total=").append(total);
+        sb.append(", pageCount=").append(pageCount);
+        sb.append(", orderBy='").append(orderBy).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
