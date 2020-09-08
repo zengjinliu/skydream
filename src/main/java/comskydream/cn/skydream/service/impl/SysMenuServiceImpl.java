@@ -68,13 +68,12 @@ public class SysMenuServiceImpl implements SysMenuService {
      */
     private List<SysMenu> getMenuTreeList(List<SysMenu> menus, List<String> menuIds){
         List<SysMenu> subMenuList = new ArrayList<>();
-        for(SysMenu menu : menus){
-            //目录
-            if(menu.getType().equals(SysConstant.CATALOG)){
-                menu.setChilds(getMenuTreeList(queryListByParentId(menu.getMenuId(), menuIds), menuIds));
+        menus.forEach(e ->{
+            if(SysConstant.CATALOG.equals(e.getType())){
+                e.setChilds(getMenuTreeList(queryListByParentId(e.getMenuId(), menuIds), menuIds));
             }
-            subMenuList.add(menu);
-        }
+            subMenuList.add(e);
+        });
         return subMenuList;
     }
 
