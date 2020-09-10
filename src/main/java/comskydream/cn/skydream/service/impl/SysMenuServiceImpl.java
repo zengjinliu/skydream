@@ -41,6 +41,12 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
+    public List<SysMenu> queryList(SysMenu sysMenu) {
+        //TODO 写mapper
+        return null;
+    }
+
+    @Override
     public List<SysMenu> queryListByParentId(String parentId, List<String> menuIdList) {
         List<SysMenu> menuList = queryMenuByParentId(parentId);
         if(menuIdList == null){

@@ -34,4 +34,11 @@ public interface SysMenuService {
      */
     List<SysMenu> queryMenuByParentId(String parentId);
 
+    /**
+     * 条件查询
+     * @param sysMenu
+     * @return
+     */
+    List<SysMenu> queryList(SysMenu sysMenu);
+
 }
