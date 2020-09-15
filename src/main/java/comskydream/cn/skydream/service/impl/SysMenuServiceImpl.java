@@ -3,15 +3,20 @@ package comskydream.cn.skydream.service.impl;
 import comskydream.cn.skydream.constant.SysConstant;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.mapper.SysMenuMapper;
+import comskydream.cn.skydream.model.MenuTreeVo;
 import comskydream.cn.skydream.model.SysMenuVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.service.SysUserService;
+import comskydream.cn.skydream.utils.SysUserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import reactor.util.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Jayson
@@ -33,6 +38,23 @@ public class SysMenuServiceImpl implements SysMenuService {
         //查出用户角色所对应的菜单id
         List<String> menuIds = sysUserService.queryAllMenuIds(userId);
         return getAllMenus(menuIds);
+    }
+
+    @Override
+    public List<SysMenu> queryTreeMenu() {
+        List<SysMenu> sysMenus = this.queryAllMenu(SysUserUtils.getUserId());
+        List<SysMenu> tree = this.tree(sysMenus);
+        return tree;
+    }
+    private List<SysMenu> tree(List<SysMenu> list){
+        for (SysMenu menu : list) {
+            List<SysMenu> sysMenus = sysMenuMapper.queryParentId(menu.getMenuId());
+            if(!CollectionUtils.isEmpty(sysMenus)){
+                menu.setChilds(sysMenus);
+                this.tree(sysMenus);
+            }
+        }
+        return list;
     }
 
     @Override

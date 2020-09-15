@@ -17,7 +17,18 @@
     from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="list" resultType="comskydream.cn.skydream.entity.SysRole">
+      select
+      <include refid="Base_Column_List" />
+      from sys_role
+      <where>
+        <if test="roleId !=null and roleId!=''"> and role_id=#{roleId}</if>
+        <if test="roleName !=null and roleName!=''"> and role_name=#{roleName}</if>
+        <if test="remark !=null and remark!=''"> and remark=#{remark}</if>
+      </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>

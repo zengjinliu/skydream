@@ -1,6 +1,7 @@
 package comskydream.cn.skydream.service;
 
 import comskydream.cn.skydream.entity.SysMenu;
+import comskydream.cn.skydream.model.MenuTreeVo;
 import comskydream.cn.skydream.model.SysMenuVo;
 import java.util.List;
 
@@ -13,11 +14,17 @@ public interface SysMenuService {
 
 
     /**
-     * 根据用户角色查询出所有的菜单以及权限
+     * 根据用户角色查询出所有的菜单以及权限，只限菜但，没有操作按钮
      * @param userId
      * @return
      */
     List<SysMenu> queryAllMenu(String userId);
+
+    /**
+     * 查询所有的菜单
+     * @return
+     */
+    List<SysMenu> queryTreeMenu();
 
     /**
      * 根据父菜单，查询子菜单

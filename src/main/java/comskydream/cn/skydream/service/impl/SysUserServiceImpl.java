@@ -1,18 +1,27 @@
 package comskydream.cn.skydream.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.constant.SysConstant;
+import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.mapper.SysUserMapper;
 import comskydream.cn.skydream.model.PasswordVo;
+import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.service.SysUserService;
 import comskydream.cn.skydream.utils.SysUserUtils;
+import comskydream.cn.skydream.utils.UuidUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -25,7 +34,19 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
     @Autowired
+    private SysUserConverter userConverter;
+    @Autowired
     private SysMenuService sysMenuService;
+
+
+    @Override
+    public ResultPage<List<SysUserVo>> pageList(SysUserVo sysUserVo) {
+        SysUser sysUser = userConverter.toPo(sysUserVo);
+        PageHelper.startPage(sysUserVo.getPage(),sysUserVo.getRows());
+        List<SysUser> list = sysUserMapper.list(sysUser);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(list);
+        return userConverter.toPageVo(pageInfo);
+    }
 
     @Override
     public SysUser getOne(SysUser user) {
@@ -73,4 +94,38 @@ public class SysUserServiceImpl implements SysUserService {
         SysUser sysUser = SysUser.builder().userId(user.getUserId()).password(npwd).build();
         this.sysUserMapper.updateByPrimaryKeySelective(sysUser);
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int save(SysUserVo sysUser) {
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        sysUser.setUserId(UuidUtils.id()).setCreateTime(LocalDateTime.now())
+                .setPassword(new Sha256Hash(sysUser.getPassword(),salt).toHex());
+        SysUser po = userConverter.toPo(sysUser);
+        po.setSalt(salt).setCreateBy(SysUserUtils.getUserId());
+        //TODO 保存用户与角色的关系
+        return sysUserMapper.insertSelective(po);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void delete(List<String> userIds) {
+        userIds.forEach(sysUserMapper::deleteByPrimaryKey);
+        //TODO 删除用户与角色的关系
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int update(SysUserVo sysUser) {
+        SysUser po = userConverter.toPo(sysUser);
+        //TODO 更新用户与角色的关系
+        return sysUserMapper.updateByPrimaryKeySelective(po);
+    }
+
+    @Override
+    public Boolean checkNameExist(String username) {
+        SysUser user = this.getOne(SysUser.builder().username(username).build());
+        return user != null;
+    }
+
 }

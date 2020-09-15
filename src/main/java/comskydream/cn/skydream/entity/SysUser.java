@@ -36,6 +36,11 @@ public class SysUser {
     private String password;
 
     /**
+     * 头像
+     */
+    private String pic;
+
+    /**
      * 盐值
      */
     private String salt;

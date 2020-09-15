@@ -3,6 +3,8 @@ package comskydream.cn.skydream.mapper;
 
 import comskydream.cn.skydream.entity.SysRole;
 
+import java.util.List;
+
 public interface SysRoleMapper {
     /**
      * 通过主键删除
@@ -33,4 +35,10 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
 
+    /**
+     * 条件查询返回多个
+     * @param sysRole
+     * @return
+     */
+    List<SysRole> list(SysRole sysRole);
 }

@@ -1,14 +1,12 @@
 package comskydream.cn.skydream.auth;
 
 import com.google.gson.Gson;
-import com.sun.deploy.net.HttpUtils;
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.utils.HttpContextUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 

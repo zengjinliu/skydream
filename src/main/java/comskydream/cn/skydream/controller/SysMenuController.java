@@ -2,6 +2,7 @@ package comskydream.cn.skydream.controller;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysMenu;
+import comskydream.cn.skydream.model.MenuTreeVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2020/9/7 16:47
  */
 @RestController
+@RequestMapping("/menu")
 public class SysMenuController {
 
     @Autowired
@@ -26,6 +28,10 @@ public class SysMenuController {
         return ResultJson.success(sysMenus);
     }
 
-
+    @RequestMapping("/getTreeMenu")
+    public ResultJson<List<SysMenu>> getTreeMenu(){
+       List<SysMenu> vos = sysMenuService.queryTreeMenu();
+        return ResultJson.success(vos);
+    }
 
 }

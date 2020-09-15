@@ -51,7 +51,7 @@ public class PageModel {
     public PageModel() {
         if(this.page == null || this.rows == null){
             this.page = 1;
-            this.rows = 20;
+            this.rows = 10;
         }
     }
 
