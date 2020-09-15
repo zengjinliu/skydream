@@ -1,5 +1,6 @@
 package comskydream.cn.skydream.controller;
 
+import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.entity.SysRole;
 import comskydream.cn.skydream.model.SysRoleVo;
@@ -21,12 +22,18 @@ import java.util.List;
 public class SysRoleController {
 
     @Autowired
-    private SysRoleService sysRoleServicel;
+    private SysRoleService sysRoleService;
 
     @RequestMapping(value = "/page",method = RequestMethod.POST)
     public ResultPage page(@RequestBody SysRoleVo sysRole){
-        ResultPage<List<SysRoleVo>> page = sysRoleServicel.page(sysRole);
+        ResultPage<List<SysRoleVo>> page = sysRoleService.page(sysRole);
         return page;
+    }
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public ResultJson add(@RequestBody SysRoleVo sysRoleVo){
+        sysRoleService.save(sysRoleVo);
+        return ResultJson.success();
     }
 
 

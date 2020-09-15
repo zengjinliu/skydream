@@ -19,4 +19,9 @@ public interface SysRoleService {
      */
     ResultPage<List<SysRoleVo>> page(SysRoleVo sysRoleVo);
 
+    /**
+     * 新增
+     * @param sysRoleVo
+     */
+    void save(SysRoleVo sysRoleVo);
 }
