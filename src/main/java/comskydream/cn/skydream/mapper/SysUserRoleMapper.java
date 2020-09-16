@@ -31,5 +31,11 @@ public interface SysUserRoleMapper {
      */
     int updateByPrimaryKeySelective(SysUserRole record);
 
+    /**
+     * 根据用户删除角色
+     * @param userId
+     */
+    void deleteByUserId(String userId);
+
 
 }

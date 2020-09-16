@@ -1,22 +1,24 @@
 package comskydream.cn.skydream.service.impl;
 
 import comskydream.cn.skydream.constant.SysConstant;
+import comskydream.cn.skydream.converter.SysMenuConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.mapper.SysMenuMapper;
-import comskydream.cn.skydream.model.MenuTreeVo;
+import comskydream.cn.skydream.mapper.SysRoleMenuMapper;
 import comskydream.cn.skydream.model.SysMenuVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.service.SysUserService;
 import comskydream.cn.skydream.utils.SysUserUtils;
+import comskydream.cn.skydream.utils.UuidUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import reactor.util.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 /**
  * @author Jayson
@@ -29,6 +31,10 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private SysRoleMenuMapper roleMenuMapper;
+    @Autowired
+    private SysMenuConverter menuConverter;
 
     @Override
     public List<SysMenu> queryAllMenu(String userId) {
@@ -42,20 +48,12 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public List<SysMenu> queryTreeMenu() {
+        //有待改进 TODO
         List<SysMenu> sysMenus = this.queryAllMenu(SysUserUtils.getUserId());
         List<SysMenu> tree = this.tree(sysMenus);
         return tree;
     }
-    private List<SysMenu> tree(List<SysMenu> list){
-        for (SysMenu menu : list) {
-            List<SysMenu> sysMenus = sysMenuMapper.queryParentId(menu.getMenuId());
-            if(!CollectionUtils.isEmpty(sysMenus)){
-                menu.setChilds(sysMenus);
-                this.tree(sysMenus);
-            }
-        }
-        return list;
-    }
+
 
     @Override
     public List<SysMenu> queryMenuByParentId(String parentId) {
@@ -66,6 +64,41 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenu> queryList(SysMenu sysMenu) {
         //TODO 写mapper
         return null;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Boolean deleteById(String menuId) {
+        List<SysMenu> sysMenus = sysMenuMapper.queryParentId(menuId);
+        if(!CollectionUtils.isEmpty(sysMenus)){
+            return false;
+        }
+        //删除菜单
+        this.sysMenuMapper.deleteByPrimaryKey(menuId);
+        //删除角色菜单表
+        roleMenuMapper.deleteByMenuId(menuId);
+        return true;
+    }
+
+    @Override
+    public void save(SysMenuVo sysMenuVo) {
+        //新增菜单
+        SysMenu menu = menuConverter.toPo(sysMenuVo);
+        menu.setMenuId(UuidUtils.id());
+        this.sysMenuMapper.insertSelective(menu);
+    }
+
+    @Override
+    public SysMenuVo selectById(String menuId) {
+        SysMenu menu = this.sysMenuMapper.selectByPrimaryKey(menuId);
+        SysMenuVo sysMenuVo = menuConverter.toVo(menu);
+        return sysMenuVo;
+    }
+
+    @Override
+    public void update(SysMenuVo sysMenuVo) {
+        SysMenu menu = menuConverter.toPo(sysMenuVo);
+        this.sysMenuMapper.updateByPrimaryKeySelective(menu);
     }
 
     @Override
@@ -103,6 +136,17 @@ public class SysMenuServiceImpl implements SysMenuService {
             subMenuList.add(e);
         });
         return subMenuList;
+    }
+
+    private List<SysMenu> tree(List<SysMenu> list){
+        for (SysMenu menu : list) {
+            List<SysMenu> sysMenus = sysMenuMapper.queryParentId(menu.getMenuId());
+            if(!CollectionUtils.isEmpty(sysMenus)){
+                menu.setChilds(sysMenus);
+                this.tree(sysMenus);
+            }
+        }
+        return list;
     }
 
 

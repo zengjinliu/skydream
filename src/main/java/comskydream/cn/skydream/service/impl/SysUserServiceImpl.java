@@ -7,7 +7,9 @@ import comskydream.cn.skydream.constant.SysConstant;
 import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
+import comskydream.cn.skydream.entity.SysUserRole;
 import comskydream.cn.skydream.mapper.SysUserMapper;
+import comskydream.cn.skydream.mapper.SysUserRoleMapper;
 import comskydream.cn.skydream.model.PasswordVo;
 import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
@@ -20,9 +22,11 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Jayson
@@ -37,6 +41,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserConverter userConverter;
     @Autowired
     private SysMenuService sysMenuService;
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
 
 
     @Override
@@ -103,22 +109,35 @@ public class SysUserServiceImpl implements SysUserService {
                 .setPassword(new Sha256Hash(sysUser.getPassword(),salt).toHex());
         SysUser po = userConverter.toPo(sysUser);
         po.setSalt(salt).setCreateBy(SysUserUtils.getUserId());
-        //TODO 保存用户与角色的关系
+        //保存用户与角色的关系
+        List<SysUserRole> build = this.build(po.getUserId(), sysUser.getRoleIds());
+        if(!CollectionUtils.isEmpty(build)){
+            build.forEach(userRoleMapper::insertSelective);
+        }
         return sysUserMapper.insertSelective(po);
     }
+
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(List<String> userIds) {
         userIds.forEach(sysUserMapper::deleteByPrimaryKey);
-        //TODO 删除用户与角色的关系
+        //删除用户与角色的关系
+        userIds.forEach(userRoleMapper::deleteByUserId);
     }
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int update(SysUserVo sysUser) {
         SysUser po = userConverter.toPo(sysUser);
-        //TODO 更新用户与角色的关系
+        //更新用户与角色的关系
+        userRoleMapper.deleteByUserId(sysUser.getUserId());
+        List<SysUserRole> list = this.build(sysUser.getUserId(), sysUser.getRoleIds());
+        if(CollectionUtils.isEmpty(list)){
+            list.forEach(userRoleMapper::insertSelective);
+        }
         return sysUserMapper.updateByPrimaryKeySelective(po);
     }
 
@@ -128,4 +147,15 @@ public class SysUserServiceImpl implements SysUserService {
         return user != null;
     }
 
+    private List<SysUserRole> build(String userId,List<String> roleIds){
+        if(!CollectionUtils.isEmpty(roleIds)){
+            List<SysUserRole> list = roleIds.stream().map(e -> {
+                SysUserRole sysUserRole = new SysUserRole();
+                sysUserRole.setId(UuidUtils.id()).setRoleId(e).setUserId(userId);
+                return sysUserRole;
+            }).collect(Collectors.toList());
+            return list;
+        }
+        return null;
+    }
 }

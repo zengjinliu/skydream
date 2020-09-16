@@ -1,8 +1,8 @@
 package comskydream.cn.skydream.service;
 
 import comskydream.cn.skydream.entity.SysMenu;
-import comskydream.cn.skydream.model.MenuTreeVo;
 import comskydream.cn.skydream.model.SysMenuVo;
+
 import java.util.List;
 
 /**
@@ -48,4 +48,29 @@ public interface SysMenuService {
      */
     List<SysMenu> queryList(SysMenu sysMenu);
 
+    /**
+     * 删除菜单,如果有下级菜单则不能删除，应先删除下级菜单
+     * @param menuId
+     * @return true 删除成功， false删除失败
+     */
+    Boolean deleteById(String menuId);
+
+    /**
+     * 新增菜单
+     * @param sysMenuVo
+     */
+    void save(SysMenuVo sysMenuVo);
+
+    /**
+     * 根据主键查询
+     * @param menuId
+     * @return
+     */
+    SysMenuVo selectById(String menuId);
+
+    /**
+     * 更新
+     * @param sysMenuVo
+     */
+    void update(SysMenuVo sysMenuVo);
 }

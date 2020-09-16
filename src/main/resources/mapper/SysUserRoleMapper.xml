@@ -20,8 +20,14 @@
     delete from sys_user_role
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+    <delete id="deleteByUserId">
+      delete from sys_user_role
+      <where>
+        <if test="userId!=null and userId!''">user_id=#{userId}</if>
+      </where>
+    </delete>
 
-  <insert id="insertSelective" parameterType="comskydream.cn.skydream.entity.SysUserRole">
+    <insert id="insertSelective" parameterType="comskydream.cn.skydream.entity.SysUserRole">
     insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

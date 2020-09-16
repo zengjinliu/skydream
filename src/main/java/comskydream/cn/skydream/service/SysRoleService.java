@@ -24,4 +24,23 @@ public interface SysRoleService {
      * @param sysRoleVo
      */
     void save(SysRoleVo sysRoleVo);
+
+    /**
+     * 批量删除
+     * @param roleId
+     */
+    void deleteById(List<String> roleId);
+
+    /**
+     * 根据主键查询
+     * @param roleId
+     * @return
+     */
+    SysRoleVo queryById(String roleId);
+
+    /**
+     * 更新角色
+     * @param sysRoleVo
+     */
+    void update(SysRoleVo sysRoleVo);
 }

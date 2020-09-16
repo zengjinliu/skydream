@@ -3,6 +3,7 @@ package comskydream.cn.skydream.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import comskydream.cn.skydream.common.ResultPage;
+import comskydream.cn.skydream.constant.SysConstant;
 import comskydream.cn.skydream.converter.SysRoleConverter;
 import comskydream.cn.skydream.entity.SysRole;
 import comskydream.cn.skydream.entity.SysRoleMenu;
@@ -55,6 +56,42 @@ public class SysRoleServiceImpl implements SysRoleService {
         //插入角色-菜单表
         List<SysRoleMenu> list = this.build(sysRole.getRoleId(), sysRoleVo.getMenuIds());
         if(!CollectionUtils.isEmpty(list)){
+            list.forEach(sysRoleMenuMapper::insertSelective);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteById(List<String> roleId) {
+        //1.删除角色表
+        roleId.forEach(sysRoleMapper::deleteByPrimaryKey);
+        //删除角色菜单管理数据
+        roleId.forEach(sysRoleMenuMapper::deleteByRoleId);
+    }
+
+    @Override
+    public SysRoleVo queryById(String roleId) {
+        SysRole sysRole = sysRoleMapper.selectByPrimaryKey(roleId);
+        SysRoleVo sysRoleVo = roleConverter.toVo(sysRole);
+        if(SysConstant.ADMIN.equals(roleId)){
+            sysRoleVo.setMenuIds( sysRoleMenuMapper.selectByRoleId(""));
+            return sysRoleVo;
+        }
+        List<String> menuIds = sysRoleMenuMapper.selectByRoleId(roleId);
+        sysRoleVo.setMenuIds(menuIds);
+        return sysRoleVo;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void update(SysRoleVo sysRoleVo) {
+        //1、更新角色表
+        SysRole sysRole = roleConverter.toPo(sysRoleVo);
+        sysRoleMapper.updateByPrimaryKeySelective(sysRole);
+        //2.更新角色菜单表,先全部删除，在新增
+        sysRoleMenuMapper.deleteByRoleId(sysRoleVo.getRoleId());
+        List<SysRoleMenu> list = this.build(sysRoleVo.getRoleId(), sysRoleVo.getMenuIds());
+        if (!CollectionUtils.isEmpty(list)) {
             list.forEach(sysRoleMenuMapper::insertSelective);
         }
     }

@@ -15,13 +15,31 @@
     from sys_role_menu
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectByRoleId" resultType="java.lang.String">
+    select menu_id from sys_role_menu
+     <where>
+       <if test="roleId!=null and roleId!=''">
+         role_id=#{roleId}
+       </if>
+     </where>
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role_menu
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+    <delete id="deleteByRoleId">
+      delete from sys_role_menu
+      where role_id=#{roleId}
+    </delete>
+    <delete id="deleteByMenuId">
+        delete from sys_role_menu
+        <where>
+          <if test="menuId!=null and menuId!=''">menu_id=#{menuId}</if>
+        </where>
+    </delete>
 
-  <insert id="insertSelective" parameterType="comskydream.cn.skydream.entity.SysRoleMenu">
+    <insert id="insertSelective" parameterType="comskydream.cn.skydream.entity.SysRoleMenu">
     insert into sys_role_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

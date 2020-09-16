@@ -2,6 +2,8 @@ package comskydream.cn.skydream.mapper;
 
 import comskydream.cn.skydream.entity.SysRoleMenu;
 
+import java.util.List;
+
 public interface SysRoleMenuMapper {
     /**
      * 通过主键删除
@@ -33,4 +35,23 @@ public interface SysRoleMenuMapper {
      */
     int updateByPrimaryKeySelective(SysRoleMenu record);
 
+    /**
+     * 根据角色id删除数据
+     * @param roleId
+     * @return
+     */
+    int deleteByRoleId(String roleId);
+
+    /**
+     * 根据角色id查询所有的菜单id
+     * @param roleId
+     * @return
+     */
+    List<String> selectByRoleId(String roleId);
+
+    /**
+     * 根据菜单id删除数据
+     * @param menuId
+     */
+    void deleteByMenuId(String menuId);
 }
