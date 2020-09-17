@@ -62,8 +62,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     public List<SysMenu> queryList(SysMenu sysMenu) {
-        //TODO 写mapper
-        return null;
+        List<SysMenu> list = sysMenuMapper.list(sysMenu);
+        return list;
     }
 
     @Transactional(rollbackFor = Exception.class)

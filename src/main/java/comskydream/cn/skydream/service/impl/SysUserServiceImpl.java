@@ -135,7 +135,7 @@ public class SysUserServiceImpl implements SysUserService {
         //更新用户与角色的关系
         userRoleMapper.deleteByUserId(sysUser.getUserId());
         List<SysUserRole> list = this.build(sysUser.getUserId(), sysUser.getRoleIds());
-        if(CollectionUtils.isEmpty(list)){
+        if(!CollectionUtils.isEmpty(list)){
             list.forEach(userRoleMapper::insertSelective);
         }
         return sysUserMapper.updateByPrimaryKeySelective(po);

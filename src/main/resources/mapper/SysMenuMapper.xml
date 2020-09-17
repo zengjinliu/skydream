@@ -21,12 +21,29 @@
     from sys_menu
     where menu_id = #{menuId,jdbcType=VARCHAR}
   </select>
-  <select id="queryParentId" resultType="comskydream.cn.skydream.entity.SysMenu">
+  <select id="queryParentId" resultMap="BaseResultMap">
 		select * from sys_menu where parent_id = #{parentId} order by order_num asc
 	</select>
+  <select id="queryRoots" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from sys_menu
+    where parent_Id = '0'
+  </select>
+    <select id="list" resultType="comskydream.cn.skydream.entity.SysMenu">
+      select <include refid="Base_Column_List"/>
+      from sys_menu
+      <where>
+        <if test="menuId!=null and menuId!=''">and menu_id=#{menuId}</if>
+        <if test="parentId!=null and parentId!=''">and parent_id=#{parentId}</if>
+        <if test="name!=null and name!=''">and name=#{name}</if>
+        <if test="url!=null and url!=''">and url=#{url}</if>
+        <if test="type!=null and type!=''">and type=#{type}</if>
+        <if test="orderNum!=null ">and menu_id=#{orderNum}</if>
+      </where>
+    </select>
 
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_menu
     where menu_id = #{menuId,jdbcType=VARCHAR}
   </delete>

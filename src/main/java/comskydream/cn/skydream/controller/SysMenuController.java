@@ -5,6 +5,7 @@ import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.model.SysMenuVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.utils.SysUserUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +34,14 @@ public class SysMenuController {
         return ResultJson.success(vos);
     }
 
+    @RequiresPermissions(value = "menu:add")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResultJson add(@RequestBody SysMenuVo sysMenuVo) {
         sysMenuService.save(sysMenuVo);
         return ResultJson.success();
     }
 
+    @RequiresPermissions(value = "menu:del")
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     public ResultJson del(@RequestParam("menuId") String menuId) {
         Boolean flag = sysMenuService.deleteById(menuId);
@@ -51,6 +54,7 @@ public class SysMenuController {
         return ResultJson.success(sysMenuVo);
     }
 
+    @RequiresPermissions(value = "menu:edit")
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public ResultJson update(@RequestBody SysMenuVo sysMenuVo){
         sysMenuService.update(sysMenuVo);

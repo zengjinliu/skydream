@@ -42,4 +42,16 @@ public interface SysMenuMapper {
      */
     List<SysMenu> queryParentId(String parentId);
 
+    /**
+     * 查询所有的根目录
+     * @return
+     */
+    List<SysMenu> queryRoots();
+
+    /**
+     * 条件查询
+     * @param sysMenu
+     * @return
+     */
+    List<SysMenu> list(SysMenu sysMenu);
 }

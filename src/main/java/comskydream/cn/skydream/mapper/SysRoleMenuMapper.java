@@ -1,5 +1,6 @@
 package comskydream.cn.skydream.mapper;
 
+import comskydream.cn.skydream.entity.SysRole;
 import comskydream.cn.skydream.entity.SysRoleMenu;
 
 import java.util.List;

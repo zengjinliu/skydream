@@ -33,8 +33,6 @@ public class SysUserVo extends PageModel {
 
     private String pic;
 
-    private List<String> roles;
-
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createTime;
 

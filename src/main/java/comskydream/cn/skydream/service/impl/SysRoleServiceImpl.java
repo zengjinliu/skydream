@@ -96,6 +96,20 @@ public class SysRoleServiceImpl implements SysRoleService {
         }
     }
 
+    @Override
+    public List<SysRoleVo> list(SysRoleVo sysRoleVo) {
+        SysRole sysRole = roleConverter.toPo(sysRoleVo);
+        List<SysRole> list = sysRoleMapper.list(sysRole);
+        if(!CollectionUtils.isEmpty(list)){
+            List<SysRoleVo> sysRoleVos = roleConverter.toVo(list);
+            sysRoleVos.forEach(e->{
+                List<String> menuIds = sysRoleMenuMapper.selectByRoleId(e.getRoleId());
+                e.setMenuIds(menuIds);
+            });
+            return sysRoleVos;
+        }
+        return null;
+    }
 
     private List<SysRoleMenu> build(String roleId, List<String> menuIds) {
         if (!CollectionUtils.isEmpty(menuIds)) {

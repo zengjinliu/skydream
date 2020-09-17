@@ -26,6 +26,7 @@
         <if test="roleName !=null and roleName!=''"> and role_name=#{roleName}</if>
         <if test="remark !=null and remark!=''"> and remark=#{remark}</if>
       </where>
+      order by create_time desc
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
