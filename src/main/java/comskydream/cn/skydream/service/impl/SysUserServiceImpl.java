@@ -155,6 +155,7 @@ public class SysUserServiceImpl implements SysUserService {
         //在发送验证码那一块需要对验证码恶意防刷处理，前段处理+后端处理
         //1.(校验验证码是否失效)拿到的手机号和验证码一定是符合要求的，也就是验证码没有失效的情况
         //2.拿到手机号后先去数据库查询是否已经存在，如果不存在就以手机号码随机注册一个，如果存在就直接登录
+        //TODO 短信登陆接口有待完善
         SysUserVo sysUserVo = this.phoneLogin(phone);
         return sysUserVo;
     }

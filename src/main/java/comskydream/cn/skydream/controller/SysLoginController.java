@@ -3,6 +3,7 @@ package comskydream.cn.skydream.controller;
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.LoginUserFormVo;
+import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysCaptchaService;
 import comskydream.cn.skydream.service.SysUserService;
 import comskydream.cn.skydream.service.SysUserTokenService;
@@ -71,11 +72,17 @@ public class SysLoginController {
         return ResultJson.success("ok");
     }
 
+    /**
+     * 短信登陆接口
+     * @param formVo
+     * @return
+     */
     @RequestMapping(value = "/msg/login",method = RequestMethod.POST)
     public ResultJson doMsgLogin(@RequestBody LoginUserFormVo formVo){
-
-
-        return ResultJson.success();
+        SysUserVo sysUserVo = sysUserService.msgLogin(formVo.getPhone(), formVo.getMsgCode());
+        //生成token 并存入数据库(也可以存入第三方缓存数据库redis)
+        String token = sysUserTokenService.createToken(sysUserVo.getUserId());
+        return ResultJson.success(sysUserVo);
     }
 
 }
