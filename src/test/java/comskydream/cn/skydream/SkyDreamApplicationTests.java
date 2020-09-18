@@ -6,14 +6,18 @@ import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.utils.DateUtils;
+import comskydream.cn.skydream.utils.HttpUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class SkyDreamApplicationTests {
@@ -22,6 +26,8 @@ class SkyDreamApplicationTests {
     private SysMenuService sysMenuService;
     @Autowired
     private SysUserConverter sysUserConverter;
+    @Autowired
+    private HttpUtils httpUtils;
 
     @Test
     void getNavMenuList() {
@@ -44,6 +50,16 @@ class SkyDreamApplicationTests {
         SysUser build = SysUser.builder().userId("1").password("12").build();
         SysUserVo sysUserVo = sysUserConverter.toVo(build);
         System.out.println(sysUserVo);
+    }
+
+    @Test
+    public void test3() throws Exception{
+        String apiUrl = "https://devapi.heweather.net/v7/air/now";
+        Map<String,Object> map = new HashMap<>();
+        map.put("location ","101010100");
+        map.put("key ","e91649bf638149369fbcae6f93727614");
+        String s = httpUtils.doGet(apiUrl,map);
+        System.out.println(s);
     }
 
 }
