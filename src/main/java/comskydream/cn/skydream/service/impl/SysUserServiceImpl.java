@@ -14,6 +14,7 @@ import comskydream.cn.skydream.model.PasswordVo;
 import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.service.SysUserService;
+import comskydream.cn.skydream.utils.NameGeneratorUtils;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import comskydream.cn.skydream.utils.UuidUtils;
 import org.apache.commons.lang.RandomStringUtils;
@@ -43,6 +44,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysMenuService sysMenuService;
     @Autowired
     private SysUserRoleMapper userRoleMapper;
+    @Autowired
+    private NameGeneratorUtils nameGeneratorUtils;
 
 
     @Override
@@ -145,6 +148,31 @@ public class SysUserServiceImpl implements SysUserService {
     public Boolean checkNameExist(String username) {
         SysUser user = this.getOne(SysUser.builder().username(username).build());
         return user != null;
+    }
+
+    @Override
+    public SysUserVo msgLogin(String phone, String msgCode) {
+        //在发送验证码那一块需要对验证码恶意防刷处理，前段处理+后端处理
+        //1.(校验验证码是否失效)拿到的手机号和验证码一定是符合要求的，也就是验证码没有失效的情况
+        //2.拿到手机号后先去数据库查询是否已经存在，如果不存在就以手机号码随机注册一个，如果存在就直接登录
+        SysUserVo sysUserVo = this.phoneLogin(phone);
+        return sysUserVo;
+    }
+
+    private SysUserVo phoneLogin(String phone){
+        SysUser user = sysUserMapper.getOne(SysUser.builder().phone(phone).build());
+        if(Objects.isNull(user)){
+            //不存在则随机生成用户名和密码
+            String salt = RandomStringUtils.randomAlphanumeric(20);
+            //密码
+            String password = RandomStringUtils.randomAlphanumeric(6);
+            //用户名
+            String name = nameGeneratorUtils.generatorName();
+            user.setUserId(UuidUtils.id()).setCreateTime(LocalDateTime.now()).setUsername(name)
+                    .setPassword(new Sha256Hash(password,salt).toHex())
+                    .setPhone(phone);
+        }
+        return userConverter.toVo(user);
     }
 
     private List<SysUserRole> build(String userId,List<String> roleIds){

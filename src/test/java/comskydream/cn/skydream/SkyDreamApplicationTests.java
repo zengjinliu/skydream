@@ -1,5 +1,6 @@
 package comskydream.cn.skydream;
 
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
@@ -7,17 +8,22 @@ import comskydream.cn.skydream.model.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.utils.DateUtils;
 import comskydream.cn.skydream.utils.HttpUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class SkyDreamApplicationTests {
@@ -60,6 +66,17 @@ class SkyDreamApplicationTests {
         map.put("key ","e91649bf638149369fbcae6f93727614");
         String s = httpUtils.doGet(apiUrl,map);
         System.out.println(s);
+    }
+    @Test
+    public void test4() throws Exception{
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+        System.out.println(start.isBefore(end));
+    }
+    @Test
+    public void test5(){
+        String salt = RandomStringUtils.randomAlphanumeric(6);
+        System.out.println(salt);
     }
 
 }

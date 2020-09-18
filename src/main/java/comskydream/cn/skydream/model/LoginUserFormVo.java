@@ -36,4 +36,16 @@ public class LoginUserFormVo {
      * 验证码的唯一标识
      */
     private String uuid;
+
+    //=======================手机登陆==========>
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 短信验证码
+     */
+    private String msgCode;
 }

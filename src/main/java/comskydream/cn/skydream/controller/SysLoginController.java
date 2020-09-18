@@ -71,4 +71,11 @@ public class SysLoginController {
         return ResultJson.success("ok");
     }
 
+    @RequestMapping(value = "/msg/login",method = RequestMethod.POST)
+    public ResultJson doMsgLogin(@RequestBody LoginUserFormVo formVo){
+
+
+        return ResultJson.success();
+    }
+
 }

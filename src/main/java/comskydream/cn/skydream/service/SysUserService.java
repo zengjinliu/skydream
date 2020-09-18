@@ -82,4 +82,13 @@ public interface SysUserService {
      * @return true 存在， false不存在
      */
     Boolean checkNameExist(String username);
+
+    /**
+     * 短信登陆，不管用户存不存在，都将为当前手机号创建一个用户，
+     * 注意验证码防刷的形式
+     * @param phone 手机号
+     * @param msgCode 验证码
+     * @return 返回用户信息
+     */
+    SysUserVo msgLogin(String phone,String msgCode);
 }
