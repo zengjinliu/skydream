@@ -2,7 +2,7 @@ package comskydream.cn.skydream.converter;
 
 import comskydream.cn.skydream.common.BaseBeanConverter;
 import comskydream.cn.skydream.entity.SysUser;
-import comskydream.cn.skydream.model.SysUserVo;
+import comskydream.cn.skydream.model.vo.SysUserVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

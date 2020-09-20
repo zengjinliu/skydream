@@ -2,7 +2,7 @@ package comskydream.cn.skydream.converter;
 
 import comskydream.cn.skydream.common.BaseBeanConverter;
 import comskydream.cn.skydream.entity.SysMenu;
-import comskydream.cn.skydream.model.SysMenuVo;
+import comskydream.cn.skydream.model.vo.SysMenuVo;
 import org.mapstruct.Mapper;
 
 /**

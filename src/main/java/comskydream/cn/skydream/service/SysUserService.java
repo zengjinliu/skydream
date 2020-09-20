@@ -1,9 +1,10 @@
 package comskydream.cn.skydream.service;
 
+import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.entity.SysUser;
-import comskydream.cn.skydream.model.PasswordVo;
-import comskydream.cn.skydream.model.SysUserVo;
+import comskydream.cn.skydream.model.vo.PasswordVo;
+import comskydream.cn.skydream.model.vo.SysUserVo;
 
 import java.util.List;
 import java.util.Set;
@@ -90,5 +91,12 @@ public interface SysUserService {
      * @param msgCode 验证码
      * @return 返回用户信息
      */
-    SysUserVo msgLogin(String phone,String msgCode);
+    ResultJson msgLogin(String phone, String msgCode);
+
+    /**
+     * 发送短信验证码
+     * @param phone 电话号码
+     * @return true发送成功，false发送失败
+     */
+    Boolean sendMsgCode(String phone);
 }

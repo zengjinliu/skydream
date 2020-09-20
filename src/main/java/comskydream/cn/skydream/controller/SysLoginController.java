@@ -2,8 +2,8 @@ package comskydream.cn.skydream.controller;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysUser;
-import comskydream.cn.skydream.model.LoginUserFormVo;
-import comskydream.cn.skydream.model.SysUserVo;
+import comskydream.cn.skydream.model.vo.LoginUserFormVo;
+import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.SysCaptchaService;
 import comskydream.cn.skydream.service.SysUserService;
 import comskydream.cn.skydream.service.SysUserTokenService;
@@ -11,17 +11,13 @@ import comskydream.cn.skydream.utils.SysUserUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import sun.nio.ch.IOUtil;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * @author Jayson
@@ -79,10 +75,18 @@ public class SysLoginController {
      */
     @RequestMapping(value = "/msg/login",method = RequestMethod.POST)
     public ResultJson doMsgLogin(@RequestBody LoginUserFormVo formVo){
-        SysUserVo sysUserVo = sysUserService.msgLogin(formVo.getPhone(), formVo.getMsgCode());
-        //生成token 并存入数据库(也可以存入第三方缓存数据库redis)
-        String token = sysUserTokenService.createToken(sysUserVo.getUserId());
-        return ResultJson.success(sysUserVo);
+        ResultJson resultJson = sysUserService.msgLogin(formVo.getPhone(), formVo.getMsgCode());
+        return resultJson;
+    }
+
+    /**
+     * 请求验证码
+     * @return
+     */
+    @RequestMapping(value = "/msg/requireCode",method = RequestMethod.POST)
+    public ResultJson requireCode(@RequestBody LoginUserFormVo formVo){
+        Boolean flag = sysUserService.sendMsgCode(formVo.getPhone());
+        return flag? ResultJson.success():ResultJson.error("请求频率太高，请稍后在试");
     }
 
 }

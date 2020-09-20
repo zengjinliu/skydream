@@ -9,7 +9,7 @@ import comskydream.cn.skydream.entity.SysRole;
 import comskydream.cn.skydream.entity.SysRoleMenu;
 import comskydream.cn.skydream.mapper.SysRoleMapper;
 import comskydream.cn.skydream.mapper.SysRoleMenuMapper;
-import comskydream.cn.skydream.model.SysRoleVo;
+import comskydream.cn.skydream.model.vo.SysRoleVo;
 import comskydream.cn.skydream.service.SysRoleService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import comskydream.cn.skydream.utils.UuidUtils;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

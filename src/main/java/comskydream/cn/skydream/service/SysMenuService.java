@@ -1,7 +1,7 @@
 package comskydream.cn.skydream.service;
 
 import comskydream.cn.skydream.entity.SysMenu;
-import comskydream.cn.skydream.model.SysMenuVo;
+import comskydream.cn.skydream.model.vo.SysMenuVo;
 
 import java.util.List;
 

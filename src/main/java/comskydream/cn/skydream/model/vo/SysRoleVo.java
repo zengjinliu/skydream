@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.model;
+package comskydream.cn.skydream.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import comskydream.cn.skydream.common.PageModel;

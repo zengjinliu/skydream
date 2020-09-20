@@ -1,8 +1,7 @@
 package comskydream.cn.skydream.service;
 
 import comskydream.cn.skydream.common.ResultPage;
-import comskydream.cn.skydream.entity.SysRole;
-import comskydream.cn.skydream.model.SysRoleVo;
+import comskydream.cn.skydream.model.vo.SysRoleVo;
 
 import java.util.List;
 

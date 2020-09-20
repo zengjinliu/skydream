@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.model;
+package comskydream.cn.skydream.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,5 +37,7 @@ public class SysUserVo extends PageModel {
     private LocalDateTime createTime;
 
     private List<String> roleIds;
+
+    private String token;
 
 }

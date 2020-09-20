@@ -5,7 +5,7 @@ import comskydream.cn.skydream.converter.SysMenuConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.mapper.SysMenuMapper;
 import comskydream.cn.skydream.mapper.SysRoleMenuMapper;
-import comskydream.cn.skydream.model.SysMenuVo;
+import comskydream.cn.skydream.model.vo.SysMenuVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.service.SysUserService;
 import comskydream.cn.skydream.utils.SysUserUtils;

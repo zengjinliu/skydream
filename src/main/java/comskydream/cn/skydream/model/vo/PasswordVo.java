@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.model;
+package comskydream.cn.skydream.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -17,4 +17,5 @@ public class SysConstant {
 
     /**按钮*/
     public static final String BUTTON = "2";
+
 }

@@ -1,10 +1,10 @@
 package comskydream.cn.skydream;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
+import comskydream.cn.skydream.component.MessageSendConfiguration;
 import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
-import comskydream.cn.skydream.model.SysUserVo;
+import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.SysMenuService;
 import comskydream.cn.skydream.utils.DateUtils;
 import comskydream.cn.skydream.utils.HttpUtils;
@@ -12,18 +12,14 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class SkyDreamApplicationTests {
@@ -34,6 +30,8 @@ class SkyDreamApplicationTests {
     private SysUserConverter sysUserConverter;
     @Autowired
     private HttpUtils httpUtils;
+    @Autowired
+    private MessageSendConfiguration messageSendConfiguration;
 
     @Test
     void getNavMenuList() {
@@ -77,6 +75,16 @@ class SkyDreamApplicationTests {
     public void test5(){
         String salt = RandomStringUtils.randomAlphanumeric(6);
         System.out.println(salt);
+    }
+
+    @Test
+    public void test6(){
+       messageSendConfiguration.sendMsg("18379254458", "543212");
+
+    }
+    @Test
+    public void test7(){
+
     }
 
 }

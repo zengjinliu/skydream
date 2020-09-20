@@ -23,5 +23,4 @@ public interface SysCaptchaService {
      */
     boolean validate(String uuid,String code);
 
-
 }
