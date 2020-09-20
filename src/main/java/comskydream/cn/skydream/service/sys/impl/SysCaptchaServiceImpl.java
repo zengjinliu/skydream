@@ -1,11 +1,10 @@
-package comskydream.cn.skydream.service.impl;
+package comskydream.cn.skydream.service.sys.impl;
 
 import com.google.code.kaptcha.Producer;
 import comskydream.cn.skydream.entity.SysCaptcha;
 import comskydream.cn.skydream.mapper.SysCaptchaMapper;
-import comskydream.cn.skydream.service.SysCaptchaService;
+import comskydream.cn.skydream.service.sys.SysCaptchaService;
 import comskydream.cn.skydream.utils.DateUtils;
-import comskydream.cn.skydream.utils.UuidUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

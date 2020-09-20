@@ -1,9 +1,9 @@
-package comskydream.cn.skydream.controller;
+package comskydream.cn.skydream.controller.sys;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.model.vo.SysRoleVo;
-import comskydream.cn.skydream.service.SysRoleService;
+import comskydream.cn.skydream.service.sys.SysRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

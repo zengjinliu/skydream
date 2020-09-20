@@ -5,7 +5,7 @@ import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.SysUserVo;
-import comskydream.cn.skydream.service.SysMenuService;
+import comskydream.cn.skydream.service.sys.SysMenuService;
 import comskydream.cn.skydream.utils.DateUtils;
 import comskydream.cn.skydream.utils.HttpUtils;
 import org.apache.commons.lang.RandomStringUtils;
@@ -32,6 +32,7 @@ class SkyDreamApplicationTests {
     private HttpUtils httpUtils;
     @Autowired
     private MessageSendConfiguration messageSendConfiguration;
+
 
     @Test
     void getNavMenuList() {
@@ -83,7 +84,16 @@ class SkyDreamApplicationTests {
 
     }
     @Test
-    public void test7(){
+    public void test7() throws Exception{
+        String apiUrl = "https://api.weibo.com";
+        String path ="/oauth2/access_token";
+        Map<String,Object> params = new HashMap<>(16);
+        params.put("client_id","3075657313");
+        params.put("client_secret","6a650b37c2d1ec667e94d5ce5c0635ad");
+        params.put("grant_type","authorization_code");
+        params.put("redirect_uri","http://skydream.com/third/weibo/success");
+        params.put("code","37926993c460108a83657283b88efb8e");
+         httpUtils.doPost(apiUrl, path, "POST", null, null,params);
 
     }
 

@@ -433,7 +433,7 @@ public class HttpUtils {
     }
 
 
-    public  HttpResponse doPost(String host, String path, @Nullable String method,
+    public  HttpResponse doPost(String host, String path, String method,
                                       Map<String, Object> headers,
                                       Map<String, Object> querys,
                                       Map<String, Object> bodys) throws Exception {

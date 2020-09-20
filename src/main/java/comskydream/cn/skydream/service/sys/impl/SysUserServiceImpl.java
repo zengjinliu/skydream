@@ -1,9 +1,8 @@
-package comskydream.cn.skydream.service.impl;
+package comskydream.cn.skydream.service.sys.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.component.MessageSendConfiguration;
@@ -18,9 +17,9 @@ import comskydream.cn.skydream.mapper.SysUserRoleMapper;
 import comskydream.cn.skydream.model.dto.MsgCodeDto;
 import comskydream.cn.skydream.model.vo.PasswordVo;
 import comskydream.cn.skydream.model.vo.SysUserVo;
-import comskydream.cn.skydream.service.SysMenuService;
-import comskydream.cn.skydream.service.SysUserService;
-import comskydream.cn.skydream.service.SysUserTokenService;
+import comskydream.cn.skydream.service.sys.SysMenuService;
+import comskydream.cn.skydream.service.sys.SysUserService;
+import comskydream.cn.skydream.service.sys.SysUserTokenService;
 import comskydream.cn.skydream.utils.DateUtils;
 import comskydream.cn.skydream.utils.NameGeneratorUtils;
 import comskydream.cn.skydream.utils.SysUserUtils;

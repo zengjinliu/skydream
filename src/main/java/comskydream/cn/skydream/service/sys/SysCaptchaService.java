@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.service;
+package comskydream.cn.skydream.service.sys;
 
 import java.awt.image.BufferedImage;
 

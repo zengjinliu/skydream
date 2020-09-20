@@ -1,11 +1,11 @@
-package comskydream.cn.skydream.controller;
+package comskydream.cn.skydream.controller.sys;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.PasswordVo;
 import comskydream.cn.skydream.model.vo.SysUserVo;
-import comskydream.cn.skydream.service.SysUserService;
+import comskydream.cn.skydream.service.sys.SysUserService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

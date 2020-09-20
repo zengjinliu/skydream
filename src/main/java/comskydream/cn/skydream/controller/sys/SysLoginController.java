@@ -1,12 +1,11 @@
-package comskydream.cn.skydream.controller;
+package comskydream.cn.skydream.controller.sys;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.LoginUserFormVo;
-import comskydream.cn.skydream.model.vo.SysUserVo;
-import comskydream.cn.skydream.service.SysCaptchaService;
-import comskydream.cn.skydream.service.SysUserService;
-import comskydream.cn.skydream.service.SysUserTokenService;
+import comskydream.cn.skydream.service.sys.SysCaptchaService;
+import comskydream.cn.skydream.service.sys.SysUserService;
+import comskydream.cn.skydream.service.sys.SysUserTokenService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.tomcat.util.http.fileupload.IOUtils;

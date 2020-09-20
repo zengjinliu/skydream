@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.service.impl;
+package comskydream.cn.skydream.service.sys.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,7 +10,7 @@ import comskydream.cn.skydream.entity.SysRoleMenu;
 import comskydream.cn.skydream.mapper.SysRoleMapper;
 import comskydream.cn.skydream.mapper.SysRoleMenuMapper;
 import comskydream.cn.skydream.model.vo.SysRoleVo;
-import comskydream.cn.skydream.service.SysRoleService;
+import comskydream.cn.skydream.service.sys.SysRoleService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import comskydream.cn.skydream.utils.UuidUtils;
 import org.springframework.beans.factory.annotation.Autowired;

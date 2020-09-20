@@ -1,9 +1,9 @@
-package comskydream.cn.skydream.controller;
+package comskydream.cn.skydream.controller.sys;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.model.vo.SysMenuVo;
-import comskydream.cn.skydream.service.SysMenuService;
+import comskydream.cn.skydream.service.sys.SysMenuService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

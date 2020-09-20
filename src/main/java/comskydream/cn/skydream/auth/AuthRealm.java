@@ -2,8 +2,8 @@ package comskydream.cn.skydream.auth;
 
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.entity.SysUserToken;
-import comskydream.cn.skydream.service.SysUserService;
-import comskydream.cn.skydream.service.SysUserTokenService;
+import comskydream.cn.skydream.service.sys.SysUserService;
+import comskydream.cn.skydream.service.sys.SysUserTokenService;
 import comskydream.cn.skydream.utils.DateUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

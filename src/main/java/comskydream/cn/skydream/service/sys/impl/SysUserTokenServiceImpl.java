@@ -1,10 +1,10 @@
-package comskydream.cn.skydream.service.impl;
+package comskydream.cn.skydream.service.sys.impl;
 
 import comskydream.cn.skydream.auth.TokenGenerator;
 import comskydream.cn.skydream.constant.TokenConstant;
 import comskydream.cn.skydream.entity.SysUserToken;
 import comskydream.cn.skydream.mapper.SysUserTokenMapper;
-import comskydream.cn.skydream.service.SysUserTokenService;
+import comskydream.cn.skydream.service.sys.SysUserTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

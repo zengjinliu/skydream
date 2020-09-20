@@ -1,4 +1,4 @@
-package comskydream.cn.skydream.service.impl;
+package comskydream.cn.skydream.service.sys.impl;
 
 import comskydream.cn.skydream.constant.SysConstant;
 import comskydream.cn.skydream.converter.SysMenuConverter;
@@ -6,8 +6,8 @@ import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.mapper.SysMenuMapper;
 import comskydream.cn.skydream.mapper.SysRoleMenuMapper;
 import comskydream.cn.skydream.model.vo.SysMenuVo;
-import comskydream.cn.skydream.service.SysMenuService;
-import comskydream.cn.skydream.service.SysUserService;
+import comskydream.cn.skydream.service.sys.SysMenuService;
+import comskydream.cn.skydream.service.sys.SysUserService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import comskydream.cn.skydream.utils.UuidUtils;
 import org.springframework.beans.factory.annotation.Autowired;

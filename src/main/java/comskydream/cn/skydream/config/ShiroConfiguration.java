@@ -44,6 +44,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/captcha", "anon");
         filterChainDefinitionMap.put("/msg/requireCode", "anon");
         filterChainDefinitionMap.put("/msg/login", "anon");
+        filterChainDefinitionMap.put("/third/weibo/success", "anon");
         filterChainDefinitionMap.put("/**", "auth");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
