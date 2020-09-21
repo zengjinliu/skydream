@@ -1,5 +1,6 @@
 package comskydream.cn.skydream.controller.thirdpartylogin;
 
+import com.google.gson.Gson;
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.component.WeiBoConfiguration;
 import comskydream.cn.skydream.model.dto.WeiBoDto;
@@ -26,7 +27,6 @@ public class ThirdPartyWeiBoLoginController {
     public ResultJson success(@RequestParam("code") String code) throws Exception {
         //获取access,微博授权成功的回调地址
         WeiBoDto accessToken = weiBoService.getAccessToken(code);
-
         return ResultJson.success(accessToken);
     }
 
