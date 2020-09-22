@@ -8,6 +8,8 @@ import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.sys.SysMenuService;
 import comskydream.cn.skydream.utils.DateUtils;
 import comskydream.cn.skydream.utils.HttpUtils;
+import comskydream.cn.skydream.utils.SkyCollectionUtils;
+import comskydream.cn.skydream.utils.SkyStringUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SkyDreamApplicationTests {
 
     @Autowired
@@ -95,6 +97,13 @@ class SkyDreamApplicationTests {
         params.put("code","37926993c460108a83657283b88efb8e");
          httpUtils.doPost(apiUrl, path, "POST", null, null,params);
 
+    }
+    @Test
+    public void test8(){
+        String str = "a,b,c";
+        List<String> strings = SkyStringUtils.splitToList(str);
+        strings.forEach(System.out::println);
+        System.out.println(SkyCollectionUtils.split(strings, 2));
     }
 
 }

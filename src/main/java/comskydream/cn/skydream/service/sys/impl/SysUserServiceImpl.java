@@ -20,10 +20,7 @@ import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.sys.SysMenuService;
 import comskydream.cn.skydream.service.sys.SysUserService;
 import comskydream.cn.skydream.service.sys.SysUserTokenService;
-import comskydream.cn.skydream.utils.DateUtils;
-import comskydream.cn.skydream.utils.NameGeneratorUtils;
-import comskydream.cn.skydream.utils.SysUserUtils;
-import comskydream.cn.skydream.utils.UuidUtils;
+import comskydream.cn.skydream.utils.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -102,7 +99,7 @@ public class SysUserServiceImpl implements SysUserService {
             if (StringUtils.isBlank(perms)) {
                 continue;
             }
-            permsSet.addAll(Arrays.asList(perms.trim().split(",")));
+            permsSet.addAll(SkyStringUtils.splitToList(perms));
         }
         return permsSet;
     }

@@ -2,6 +2,7 @@ package comskydream.cn.skydream.config;
 
 import comskydream.cn.skydream.common.ResultJson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.ListUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindException;
