@@ -32,6 +32,7 @@ public class GlobalExceptionConfiguration {
      * @return
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
+    @ResponseBody
     public ResultJson<String> handlerVaild(Exception validException){
         ResultJson<String> rj = new ResultJson<String>();
         rj.setCode(HttpStatus.SC_BAD_REQUEST);
