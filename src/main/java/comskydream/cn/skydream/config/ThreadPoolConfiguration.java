@@ -5,16 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
+ * 并且开启异步注解，亦可以使用CompletableFuture做异步编排处理
  * @author Jayson
  * @date 2020/9/22 16:50
  */
 @Configuration
+@EnableAsync
 public class ThreadPoolConfiguration {
 
 

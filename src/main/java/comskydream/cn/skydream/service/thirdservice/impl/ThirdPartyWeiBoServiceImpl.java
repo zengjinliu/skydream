@@ -1,10 +1,8 @@
 package comskydream.cn.skydream.service.thirdservice.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import comskydream.cn.skydream.auth.TokenGenerator;
 import comskydream.cn.skydream.component.WeiBoConfiguration;
 import comskydream.cn.skydream.constant.RedisConstant;
 import comskydream.cn.skydream.model.dto.WeiBoDto;
@@ -19,12 +17,8 @@ import comskydream.cn.skydream.utils.UuidUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
-import javax.lang.model.element.VariableElement;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
