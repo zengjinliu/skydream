@@ -61,7 +61,6 @@ public class ThirdPartyWeiBoComponent extends AbstractThirdUserInfo{
         try {
             String apiUrl ="https://api.weibo.com/2/users/show.json?uid="+uid+"&access_token="+accessToken;
             String json  = httpUtils.doGet(apiUrl);
-            System.out.println(json);
             JsonObject object = JsonParser.parseString(json).getAsJsonObject();
             String name = object.get("name").getAsString();
             String pic = object.get("profile_image_url").getAsString();

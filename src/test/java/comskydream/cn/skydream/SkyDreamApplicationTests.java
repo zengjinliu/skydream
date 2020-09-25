@@ -6,10 +6,7 @@ import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.sys.SysMenuService;
-import comskydream.cn.skydream.utils.DateUtils;
-import comskydream.cn.skydream.utils.HttpUtils;
-import comskydream.cn.skydream.utils.SkyCollectionUtils;
-import comskydream.cn.skydream.utils.SkyStringUtils;
+import comskydream.cn.skydream.utils.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +102,12 @@ class SkyDreamApplicationTests {
         List<String> strings = SkyStringUtils.splitToList(str);
         strings.forEach(System.out::println);
         System.out.println(SkyCollectionUtils.split(strings, 2));
+    }
+
+    @Test
+    public void test9(){
+        String format = DecimalFormatUtils.instance().format(1.0, "0.00%");
+        System.out.println(format);
     }
 
 }

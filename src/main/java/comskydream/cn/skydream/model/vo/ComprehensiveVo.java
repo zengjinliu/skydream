@@ -1,10 +1,14 @@
 package comskydream.cn.skydream.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.boot.convert.DurationFormat;
+import org.springframework.boot.convert.DurationStyle;
 
 import java.io.Serializable;
 
@@ -25,6 +29,7 @@ public class ComprehensiveVo<T> implements Serializable {
 
     private String username;
 
+   @DurationFormat(value = DurationStyle.ISO8601)
     private String name;
 
     private String token;

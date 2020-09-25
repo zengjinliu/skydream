@@ -123,7 +123,7 @@ public class HttpUtils {
                 return null;
             }
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                httpStr = EntityUtils.toString(entity, "utf-8");
+                httpStr = EntityUtils.toString(entity, Consts.UTF_8);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
