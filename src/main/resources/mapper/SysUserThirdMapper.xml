@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comskydream.cn.skydream.mapper.SysUserThirdMapper">
+  <resultMap id="BaseResultMap" type="comskydream.cn.skydream.entity.SysUserThird">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="expires_in" jdbcType="BIGINT" property="expiresIn" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, access_token, name, pic, expires_in, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_third
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user_third
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByUserId">
+      delete from sys_user_third where user_id=#{userId}
+    </delete>
+    <insert id="insert" parameterType="comskydream.cn.skydream.entity.SysUserThird">
+    insert into sys_user_third (id, uid, access_token, 
+      name, pic, expires_in, 
+      user_id)
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{expiresIn,jdbcType=BIGINT}, 
+      #{userId,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="comskydream.cn.skydream.entity.SysUserThird">
+    update sys_user_third
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="expiresIn != null">
+        expires_in = #{expiresIn,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

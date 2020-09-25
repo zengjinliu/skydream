@@ -12,8 +12,10 @@ import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.entity.SysUserRole;
+import comskydream.cn.skydream.entity.SysUserThird;
 import comskydream.cn.skydream.mapper.SysUserMapper;
 import comskydream.cn.skydream.mapper.SysUserRoleMapper;
+import comskydream.cn.skydream.mapper.SysUserThirdMapper;
 import comskydream.cn.skydream.model.dto.MsgCodeDto;
 import comskydream.cn.skydream.model.vo.PasswordVo;
 import comskydream.cn.skydream.model.vo.SysUserVo;
@@ -59,6 +61,8 @@ public class SysUserServiceImpl implements SysUserService {
     private StringRedisTemplate redisTemplate;
     @Autowired
     private SysUserTokenService sysUserTokenService;
+    @Autowired
+    private SysUserThirdMapper sysUserThirdMapper;
 
 
     @Override
@@ -139,6 +143,8 @@ public class SysUserServiceImpl implements SysUserService {
         userIds.forEach(sysUserMapper::deleteByPrimaryKey);
         //删除用户与角色的关系
         userIds.forEach(userRoleMapper::deleteByUserId);
+        //删除当前用户与第三方的数据
+        userIds.forEach(sysUserThirdMapper::deleteByUserId);
     }
 
     @Transactional(rollbackFor = Exception.class)

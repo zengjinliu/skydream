@@ -59,6 +59,9 @@
       <if test="createBy != null">
         create_by,
       </if>
+      <if test="pic != null">
+        pic,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -84,6 +87,9 @@
       </if>
       <if test="createBy != null">
         #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -112,6 +118,9 @@
       <if test="createBy != null">
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
@@ -128,6 +137,7 @@
       <if test="phone !=null and phone!=''"> and phone=#{phone}</if>
       <if test="createBy !=null and createBy!=''"> and create_by=#{createBy}</if>
       <if test="createTime !=null "> and create_time=#{createTime}</if>
+      <if test="pic !=null "> and pic=#{pic}</if>
     </where>
     order by create_time desc
   </select>
@@ -144,6 +154,7 @@
       <if test="phone !=null and phone!=''"> and phone=#{phone}</if>
       <if test="createBy !=null and createBy!=''"> and create_by=#{createBy}</if>
       <if test="createTime !=null"> and create_time=#{createTime}</if>
+      <if test="pic !=null"> and pic=#{pic}</if>
     </where>
 
   </select>

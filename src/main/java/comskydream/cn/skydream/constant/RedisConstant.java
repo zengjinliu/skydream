@@ -12,6 +12,4 @@ public class RedisConstant {
     /**验证码有效期*/
     public static final long SMS_CODE_VALID_PERIOD = 60 * 1000;
 
-    /**第三方登录的成功后要通知前端的数据，同时保存token到前端*/
-    public static final String WEIBO_REDIRET_INFO = "weibo:info";
 }

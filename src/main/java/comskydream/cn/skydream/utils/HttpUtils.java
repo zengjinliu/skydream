@@ -34,6 +34,7 @@ import reactor.util.annotation.Nullable;
 
 
 import javax.net.ssl.*;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -102,7 +103,7 @@ public class HttpUtils {
     }
 
     /**
-     * get请求不带参数
+     * get
      *
      * @param apiUrl 请求地址
      * @return
@@ -116,47 +117,6 @@ public class HttpUtils {
         CloseableHttpResponse response = null;
         try {
             HttpGet httpGet = new HttpGet(apiUrl);
-            response = httpClient.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            if (entity == null) {
-                return null;
-            }
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                httpStr = EntityUtils.toString(entity, "utf-8");
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        } finally {
-            if (response != null) {
-                EntityUtils.consume(response.getEntity());
-            }
-        }
-        return httpStr;
-    }
-
-    /**
-     * get请求，携带参数
-     *
-     * @param apiUrl 请求地址
-     * @param param  请求参数 k-v形式
-     * @return
-     * @throws Exception
-     */
-    public String doGet(String apiUrl, Map<String, Object> param) throws Exception {
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connMgr).setDefaultRequestConfig(requestConfig)
-                .build();
-        String httpStr = null;
-        CloseableHttpResponse response = null;
-        try {
-            List<NameValuePair> pairList = new ArrayList<>();
-            for (Map.Entry<String, Object> entry : param.entrySet()) {
-                NameValuePair pair = new BasicNameValuePair(entry.getKey(), entry.getValue().toString());
-                pairList.add(pair);
-            }
-            String s = URLEncodedUtils.format(pairList, Consts.UTF_8).replaceAll("[+]", "");
-            HttpGet httpGet = new HttpGet(URI.create(apiUrl + "?" + s));
-            httpGet.addHeader("Content-type", "application/x-www-form-urlencoded");
             response = httpClient.execute(httpGet);
             HttpEntity entity = response.getEntity();
             if (entity == null) {
@@ -434,9 +394,9 @@ public class HttpUtils {
 
 
     public  HttpResponse doPost(String host, String path, String method,
-                                      Map<String, Object> headers,
-                                      Map<String, Object> querys,
-                                      Map<String, Object> bodys) throws Exception {
+                                      @NotNull Map<String, Object> headers,
+                                    @NotNull Map<String, Object> querys,
+                                    @NotNull Map<String, Object> bodys) throws Exception {
         HttpClient httpClient = wrapClient(host);
         HttpPost request = new HttpPost(buildUrl(host, path, querys));
         for (Map.Entry<String, Object> e : headers.entrySet()) {

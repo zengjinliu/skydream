@@ -61,13 +61,14 @@ class SkyDreamApplicationTests {
 
     @Test
     public void test3() throws Exception{
-        String apiUrl = "https://devapi.heweather.net/v7/air/now";
-        Map<String,Object> map = new HashMap<>();
-        map.put("location ","101010100");
-        map.put("key ","e91649bf638149369fbcae6f93727614");
-        String s = httpUtils.doGet(apiUrl,map);
-        System.out.println(s);
+
     }
+
+    @Test
+    public void testGetRequest() throws Exception {
+
+    }
+
     @Test
     public void test4() throws Exception{
         LocalDateTime start = LocalDateTime.now();
