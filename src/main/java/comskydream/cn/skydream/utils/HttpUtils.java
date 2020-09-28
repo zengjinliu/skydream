@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 也可以采用Hutool的工具类发起请求，系统不做唯一要求
  * @author Jayson
  * @date 2020/9/18 10:45
  */

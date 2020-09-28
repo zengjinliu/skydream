@@ -1,6 +1,7 @@
 package comskydream.cn.skydream;
 
 import comskydream.cn.skydream.component.MessageSendConfiguration;
+import comskydream.cn.skydream.component.OssConfiguration;
 import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -110,4 +112,13 @@ class SkyDreamApplicationTests {
         System.out.println(format);
     }
 
+    @Autowired
+    private OssConfiguration ossConfiguration;
+    @Test
+    public void testOss() throws Exception {
+//        ossConfiguration.uploadFile("hah");
+//        System.out.println("上传图片成功----》");
+        System.out.println(LocalDate.now().toString());
+        System.out.println("上传图片成功----》");
+    }
 }
