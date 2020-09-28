@@ -3,12 +3,14 @@ package comskydream.cn.skydream.controller.sys;
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.LoginUserFormVo;
+import comskydream.cn.skydream.model.vo.SysUserVo;
 import comskydream.cn.skydream.service.sys.SysCaptchaService;
 import comskydream.cn.skydream.service.sys.SysUserService;
 import comskydream.cn.skydream.service.sys.SysUserTokenService;
 import comskydream.cn.skydream.utils.SysUserUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +47,8 @@ public class SysLoginController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResultJson doLogin(@RequestBody LoginUserFormVo formVo){
+    public ResultJson<SysUserVo> doLogin(@RequestBody LoginUserFormVo formVo){
+        SysUserVo vo = new SysUserVo();
         //验证码校验
         boolean validate = sysCaptchaService.validate(formVo.getUuid(), formVo.getCaptcha());
         if(!validate){
@@ -58,7 +61,9 @@ public class SysLoginController {
         }
         //生成token 并存入数据库(也可以存入第三方缓存数据库redis)
         String token = sysUserTokenService.createToken(user.getUserId());
-        return ResultJson.success(token);
+        BeanUtils.copyProperties(user,vo);
+        vo.setToken(token);
+        return ResultJson.success(vo);
     }
 
     @RequestMapping("/logout")

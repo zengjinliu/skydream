@@ -13,7 +13,7 @@
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, username, password, salt, phone, create_time, update_time, create_by
+    user_id, username, password, pic,salt, phone, create_time, update_time, create_by
   </sql>
 
   <sql id="condition">
