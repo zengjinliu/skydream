@@ -2,6 +2,7 @@ package comskydream.cn.skydream.controller.sys;
 
 import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.common.ResultPage;
+import comskydream.cn.skydream.custom.UserExport;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.PasswordVo;
 import comskydream.cn.skydream.model.vo.SysUserVo;
@@ -11,6 +12,11 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +30,8 @@ public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
+    @Autowired
+    private UserExport userExport;
 
 
     @RequestMapping(value = "/page",method = RequestMethod.POST)
@@ -80,6 +88,17 @@ public class SysUserController {
     public ResultJson queryAllPerms(){
         Set<String> set = sysUserService.queryAllPermission(SysUserUtils.getUserId());
         return ResultJson.success(set);
+    }
+
+    @RequestMapping(value = "/export",method = RequestMethod.POST)
+    public void doExport(HttpServletResponse res, HttpServletRequest req) throws IOException {
+        res.setCharacterEncoding("UTF-8");
+        res.setContentType("application/x-download");
+        String filename = "用户列表.xls";
+        filename = URLEncoder.encode(filename,"UTF-8");
+        res.addHeader("Content-disposition","attachment;filename="+filename);
+        ServletOutputStream outputStream = res.getOutputStream();
+        userExport.exportUser(outputStream,filename);
     }
 
 }
