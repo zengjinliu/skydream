@@ -60,7 +60,15 @@ class SkyDreamApplicationTests {
 
     @Test
     public void test3() throws Exception{
+        LocalDateTime first = DateUtils.firstDateTime();
+        LocalDateTime dateTime = DateUtils.firstDateTime(2);
+        LocalDateTime end = DateUtils.endDateTime();
+        System.out.println(first);
+        System.out.println(end);
+        System.out.println(dateTime);
 
+        System.out.println(DateUtils.startWeekTime());
+        System.out.println(DateUtils.endWeekTime());
     }
 
     @Test

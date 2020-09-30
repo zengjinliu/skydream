@@ -4,7 +4,9 @@ import org.apache.tomcat.jni.Local;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalField;
 import java.util.Date;
 import java.util.Locale;
@@ -110,5 +112,59 @@ public class DateUtils {
         return parse;
     }
 
+    public static LocalTime startOfDay(){
+        return LocalTime.of(0,0,0);
+    }
+
+    public static LocalTime endOfTDay(){
+        return LocalTime.of(23,59,59);
+    }
+
+
+    /**
+     * 获取当月的开始时间
+     * @return
+     */
+    public static LocalDateTime firstDateTime(){
+        LocalDateTime localDateTime = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()).atTime(startOfDay());
+        return localDateTime;
+    }
+
+    /**
+     * 获取当前月的结束时间
+     * @return
+     */
+    public static LocalDateTime endDateTime(){
+        LocalDateTime localDateTime = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()).atTime(endOfTDay());
+        return localDateTime;
+    }
+
+    /**
+     * 获取当前年指定月的开始时间
+     * @param month 指定月
+     * @return
+     */
+    public static LocalDateTime firstDateTime(int month){
+        LocalDateTime atTime = LocalDate.now().withMonth(month).with(TemporalAdjusters.firstDayOfMonth()).atTime(startOfDay());
+        return atTime;
+    }
+
+    /**
+     * 获取当前时间当前周的开始时间
+     * @return
+     */
+    public static LocalDateTime startWeekTime(){
+        LocalDateTime dateTime = LocalDate.now().with(DayOfWeek.MONDAY).atTime(startOfDay());
+        return dateTime;
+    }
+
+    /**
+     * 获取当前时间当前周的结束时间
+     * @return
+     */
+    public static LocalDateTime endWeekTime(){
+        LocalDateTime dateTime = LocalDate.now().with(DayOfWeek.SUNDAY).atTime(startOfDay());
+        return dateTime;
+    }
 
 }

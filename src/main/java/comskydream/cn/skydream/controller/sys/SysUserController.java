@@ -80,6 +80,7 @@ public class SysUserController {
 
     @RequestMapping(value = "/queryById",method = RequestMethod.GET)
     public ResultJson<SysUser> queryById(@RequestParam("userId") String userId){
+        //TODO 角色回显
         SysUser user = sysUserService.getOne(SysUser.builder().userId(userId).build());
         return ResultJson.success(user);
     }
