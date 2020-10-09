@@ -129,4 +129,11 @@ class SkyDreamApplicationTests {
         System.out.println(LocalDate.now().toString());
         System.out.println("上传图片成功----》");
     }
+
+    @Test
+    public void testImgTransferBase64() throws Exception{
+        String s = ImageUtils.imageToBase64("C:\\Users\\87137\\Pictures\\Saved Pictures\\1.jpg");
+        System.out.println(s);
+    }
+
 }

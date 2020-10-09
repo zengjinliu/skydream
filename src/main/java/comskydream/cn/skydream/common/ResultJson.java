@@ -16,34 +16,45 @@ public class ResultJson<T> {
 
     private T datas;
 
-    public static ResultJson error(Integer code,String msg){
-        ResultJson resultJson = new ResultJson();
-        resultJson.setCode(code);
-        resultJson.setMsg(msg);
-        return resultJson;
+    public static <T> ResultJson<T> error() {
+        return result(HttpStatus.INTERNAL_SERVER_ERROR.value(),null,null);
     }
-    public static ResultJson error(String msg){
-        ResultJson resultJson = new ResultJson();
-        resultJson.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        resultJson.setMsg(msg);
-        return resultJson;
+    public static <T> ResultJson<T> error(String msg) {
+        return result(HttpStatus.INTERNAL_SERVER_ERROR.value(),msg,null);
     }
-    public static <T> ResultJson<T> success(T data){
-        ResultJson<T>  resultJson = success();
-        resultJson.setDatas(data);
-        return resultJson;
+
+    public static <T> ResultJson<T> error(T data) {
+        return result(HttpStatus.INTERNAL_SERVER_ERROR.value(),null,data);
     }
-    public static <T> ResultJson<T> success(){
-        ResultJson<T>  resultJson = new  ResultJson<T> ();
-        resultJson.setCode(HttpStatus.OK.value());
-        resultJson.setMsg(HttpStatus.OK.getReasonPhrase());
-        return resultJson;
+
+    public static <T> ResultJson<T> error(T data,String msg) {
+        return result(HttpStatus.INTERNAL_SERVER_ERROR.value(),msg,data);
     }
-    public static <T> ResultJson<T> success(Integer code,String msg){
+
+    public static <T> ResultJson<T> error(Integer code,String msg) {
+        return result(code,msg,null);
+    }
+
+    public static <T> ResultJson<T> success(T data) {
+        return result(HttpStatus.OK.value(), null, data);
+    }
+
+
+    public static <T> ResultJson<T> success(T data, String msg) {
+        return result(HttpStatus.OK.value(), msg, data);
+    }
+
+
+    public static <T> ResultJson<T> success() {
+        return result(HttpStatus.OK.value(), null, null);
+    }
+
+    private static <T> ResultJson<T> result(Integer code, String msg, T data) {
         //没有数据，只返回状态码和消息
-        ResultJson<T>  resultJson = new  ResultJson<T> ();
+        ResultJson<T> resultJson = new ResultJson<T>();
         resultJson.setCode(code);
         resultJson.setMsg(msg);
+        resultJson.setDatas(data);
         return resultJson;
     }
 

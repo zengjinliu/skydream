@@ -69,7 +69,7 @@ public class SysLoginController {
     @RequestMapping("/logout")
     public ResultJson logout(){
         sysUserTokenService.logout(SysUserUtils.getUserId());
-        return ResultJson.success("ok");
+        return ResultJson.success();
     }
 
     /**
