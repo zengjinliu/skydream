@@ -31,7 +31,7 @@ public class ThreadPoolConfiguration {
         executor.setQueueCapacity(300);
         executor.setDaemon(false);
         executor.setKeepAliveSeconds(3000);
-        executor.setThreadNamePrefix("sky-dream");
+        executor.setThreadNamePrefix("sky-dream-");
         executor.setRejectedExecutionHandler(newInstanceExecutionHandler());
         return executor;
     }

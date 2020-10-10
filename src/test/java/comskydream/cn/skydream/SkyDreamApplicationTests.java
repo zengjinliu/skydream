@@ -22,8 +22,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SkyDreamApplicationTests {
@@ -155,8 +157,23 @@ class SkyDreamApplicationTests {
         env.put("b", 3);
         //支持嵌套函数
         String exp = "add(sub(sub(a,b),b),b)";
-        Future<String> task = aviatorAsyncExecute.aviatorExecuteResultStr(env, exp);
-        String value = task.get(2, TimeUnit.MINUTES);
+        Future<Object> task = aviatorAsyncExecute.aviatorExecuteResult(env, exp);
+        Object value = task.get(2, TimeUnit.MINUTES);
         System.out.println(value);
+    }
+
+    @Autowired
+    TaskTest taskTest;
+
+    @Test
+    public void testAsync(){
+        System.out.println("------------->" +Thread.currentThread().getName());
+        Future<Boolean> task = taskTest.task();
+        try {
+            Boolean aBoolean = task.get(2, TimeUnit.MINUTES);
+            System.out.println(aBoolean);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
