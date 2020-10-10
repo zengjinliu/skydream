@@ -1,5 +1,6 @@
 package comskydream.cn.skydream;
 
+import comskydream.cn.skydream.aviator.example.SkyAviatorAsyncExecute;
 import comskydream.cn.skydream.component.MessageSendConfiguration;
 import comskydream.cn.skydream.component.OssConfiguration;
 import comskydream.cn.skydream.converter.SysUserConverter;
@@ -21,6 +22,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SkyDreamApplicationTests {
@@ -59,7 +62,7 @@ class SkyDreamApplicationTests {
     }
 
     @Test
-    public void test3() throws Exception{
+    public void test3() throws Exception {
         LocalDateTime first = DateUtils.firstDateTime();
         LocalDateTime dateTime = DateUtils.firstDateTime(2);
         LocalDateTime end = DateUtils.endDateTime();
@@ -77,37 +80,40 @@ class SkyDreamApplicationTests {
     }
 
     @Test
-    public void test4() throws Exception{
+    public void test4() throws Exception {
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now().plusDays(1);
         System.out.println(start.isBefore(end));
     }
+
     @Test
-    public void test5(){
+    public void test5() {
         String salt = RandomStringUtils.randomAlphanumeric(6);
         System.out.println(salt);
     }
 
     @Test
-    public void test6(){
-       messageSendConfiguration.sendMsg("18379254458", "543212");
+    public void test6() {
+        messageSendConfiguration.sendMsg("18379254458", "543212");
 
     }
+
     @Test
-    public void test7() throws Exception{
+    public void test7() throws Exception {
         String apiUrl = "https://api.weibo.com";
-        String path ="/oauth2/access_token";
-        Map<String,Object> params = new HashMap<>(16);
-        params.put("client_id","3075657313");
-        params.put("client_secret","6a650b37c2d1ec667e94d5ce5c0635ad");
-        params.put("grant_type","authorization_code");
-        params.put("redirect_uri","http://skydream.com/third/weibo/success");
-        params.put("code","37926993c460108a83657283b88efb8e");
-         httpUtils.doPost(apiUrl, path, "POST", null, null,params);
+        String path = "/oauth2/access_token";
+        Map<String, Object> params = new HashMap<>(16);
+        params.put("client_id", "3075657313");
+        params.put("client_secret", "6a650b37c2d1ec667e94d5ce5c0635ad");
+        params.put("grant_type", "authorization_code");
+        params.put("redirect_uri", "http://skydream.com/third/weibo/success");
+        params.put("code", "37926993c460108a83657283b88efb8e");
+        httpUtils.doPost(apiUrl, path, "POST", null, null, params);
 
     }
+
     @Test
-    public void test8(){
+    public void test8() {
         String str = "a,b,c";
         List<String> strings = SkyStringUtils.splitToList(str);
         strings.forEach(System.out::println);
@@ -115,13 +121,14 @@ class SkyDreamApplicationTests {
     }
 
     @Test
-    public void test9(){
+    public void test9() {
         String format = DecimalFormatUtils.instance().format(1.0, "0.00%");
         System.out.println(format);
     }
 
     @Autowired
     private OssConfiguration ossConfiguration;
+
     @Test
     public void testOss() throws Exception {
 //        ossConfiguration.uploadFile("hah");
@@ -131,9 +138,25 @@ class SkyDreamApplicationTests {
     }
 
     @Test
-    public void testImgTransferBase64() throws Exception{
+    public void testImgTransferBase64() throws Exception {
         String s = ImageUtils.imageToBase64("C:\\Users\\87137\\Pictures\\Saved Pictures\\1.jpg");
         System.out.println(s);
     }
 
+
+    @Autowired
+    private SkyAviatorAsyncExecute aviatorAsyncExecute;
+
+    @Test
+    public void testDesignFunction() throws Exception {
+        //测试自定义表达式成功
+        Map<String, Object> env = new HashMap<>();
+        env.put("a", 1);
+        env.put("b", 3);
+        //支持嵌套函数
+        String exp = "add(sub(sub(a,b),b),b)";
+        Future<String> task = aviatorAsyncExecute.aviatorExecuteResultStr(env, exp);
+        String value = task.get(2, TimeUnit.MINUTES);
+        System.out.println(value);
+    }
 }
