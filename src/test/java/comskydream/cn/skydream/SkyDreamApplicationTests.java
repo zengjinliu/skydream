@@ -166,12 +166,12 @@ class SkyDreamApplicationTests {
     TaskTest taskTest;
 
     @Test
-    public void testAsync(){
+    public void testAsync() throws Exception{
         System.out.println("------------->" +Thread.currentThread().getName());
-        Future<Boolean> task = taskTest.task();
+        Future<Object> task = taskTest.task1();
         try {
-            Boolean aBoolean = task.get(2, TimeUnit.MINUTES);
-            System.out.println(aBoolean);
+            Object Integer = task.get(2, TimeUnit.MINUTES);
+            System.out.println(Integer);
         } catch (Exception e) {
             e.printStackTrace();
         }

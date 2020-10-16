@@ -49,6 +49,7 @@ public class SkyAviatorAsyncExecute {
      */
     @Async
     public Future<Object> aviatorExecuteResult(final Map<String, Object> env, String exp) {
+        System.out.println("当前线程名字:aviatorExecuteResult" + Thread.currentThread().getName());
         Expression expression = compileExample.buildExpression(exp);
         String debugInfo = "run %s expression ,script name %s ,env= %s";
         log.debug(String.format(debugInfo, exp, expression.toString(), env.toString()));
