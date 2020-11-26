@@ -4,6 +4,8 @@ import comskydream.cn.skydream.common.ResultJson;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.LoginUserFormVo;
 import comskydream.cn.skydream.model.vo.SysUserVo;
+import comskydream.cn.skydream.security.RSAKey;
+import comskydream.cn.skydream.security.RSAUtils;
 import comskydream.cn.skydream.service.sys.SysCaptchaService;
 import comskydream.cn.skydream.service.sys.SysUserService;
 import comskydream.cn.skydream.service.sys.SysUserTokenService;
@@ -47,7 +49,7 @@ public class SysLoginController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResultJson<SysUserVo> doLogin(@RequestBody LoginUserFormVo formVo){
+    public ResultJson<SysUserVo> doLogin(@RequestParam LoginUserFormVo formVo){
         SysUserVo vo = new SysUserVo();
         //验证码校验
         boolean validate = sysCaptchaService.validate(formVo.getUuid(), formVo.getCaptcha());
@@ -56,9 +58,9 @@ public class SysLoginController {
         }
         //校验用户信息
         SysUser user = sysUserService.getOne(SysUser.builder().username(formVo.getUsername()).build());
-        if(user == null || !user.getPassword().equals(new Sha256Hash(formVo.getPassword(), user.getSalt()).toHex())) {
-            return ResultJson.error("账号或密码不正确");
-        }
+//        if(user == null || !user.getPassword().equals(new Sha256Hash(formVo.getPassword(), user.getSalt()).toHex())) {
+//            return ResultJson.error("账号或密码不正确");
+//        }
         //生成token 并存入数据库(也可以存入第三方缓存数据库redis)
         String token = sysUserTokenService.createToken(user.getUserId());
         BeanUtils.copyProperties(user,vo);

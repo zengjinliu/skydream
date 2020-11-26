@@ -1,5 +1,7 @@
 package comskydream.cn.skydream;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import comskydream.cn.skydream.aviator.example.SkyAviatorAsyncExecute;
 import comskydream.cn.skydream.component.MessageSendConfiguration;
 import comskydream.cn.skydream.component.OssConfiguration;
@@ -7,6 +9,9 @@ import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.SysUserVo;
+import comskydream.cn.skydream.security.AESECBUtil;
+import comskydream.cn.skydream.security.RSAKey;
+import comskydream.cn.skydream.security.RSAUtils;
 import comskydream.cn.skydream.service.sys.SysMenuService;
 import comskydream.cn.skydream.utils.*;
 import org.apache.commons.lang.RandomStringUtils;
@@ -16,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import java.awt.*;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -175,5 +181,37 @@ class SkyDreamApplicationTests {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test10() throws Exception{
+        RSAKey keys = RSAUtils.createKeys(1024);
+        System.out.println(keys.getPublicKey());
+        System.out.println("-----------------");
+        System.out.println(keys.getPrivateKey());
+//        String s = RSAUtils.publicEncrypt("123456", RSAUtils.getPublicKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDP/mS8tqsxIR0LM3yND3kY/ORykXqDtbw9TQUtP7fHfwsrFHdC18CGPfAtF8WESPDrZsRDpuP1itb3GjhzLNniiaoMSm/E+hif13z1OSFStiRbBWqsbfg2oOzzlYp1baqe9Yuh7OJ9KeoiEsjsno25bsnICnHaIOBirzAvlIr2ZQIDAQAB"));
+//        String decrypt = RSAUtils.privateDecrypt(s, RSAUtils.getPrivateKey("MIICXAIBAAKBgQDP/mS8tqsxIR0LM3yND3kY/ORykXqDtbw9TQUtP7fHfwsrFHdC18CGPfAtF8WESPDrZsRDpuP1itb3GjhzLNniiaoMSm/E+hif13z1OSFStiRbBWqsbfg2oOzzlYp1baqe9Yuh7OJ9KeoiEsjsno25bsnICnHaIOBirzAvlIr2ZQIDAQABAoGAM5QmbxXthhVsGmb+MAzyPtwX2sFw3FCpCZqb+gifDn3WyywcFxthxuh9MvF+LbvY4sdtTEmKpk1z2XtLHGS28yAM9X8U8pujiSR8qA9lkJopB5PSyyJEW12bxuVvcEN+qDIGGEy7aL946e5YMYLyWxE9Oh206D45lHCA99sjR1ECQQDzUHltMb4+nSTNzBiov8cnVyfJrrl2goaHa1p71OkNM2dXYDaUCiS1RTAzIhwbTKj788H+j8HsIDaD8pgZYJfnAkEA2tZ+UraIhNIqs+i9oFwAIFLP21uwmlerqHvrXoosHjLb3jZYltlksl2ZG4nVUJkeAGjXcASHbZ4rYUdqTY/F0wJBANKSnOQBntH1kfqBXf39K1BCv25uRpfn0qG0KPTuiFsiV5do7xMjzC0NGe/G32hI6h5TEVtL8tp17ng3Jacgz5UCQF2Oab8OzlqKRztW+wq9ikhHXxmWn2+8n2SOZderFqVqdNkRPtpu4j/nB/ff+1RTwaHHMKNxLDzO7BjQoT+7gYUCQH4gNXJYGrXPlvNpi1MCM0pBAPz+CZm84i2GNzRRrInzaIaAOC5boSbFKZMtqQorydWn2omJfbHA8oEXd+RzUZw="));
+//        System.out.println(decrypt);
+    }
+
+
+    @Test
+    public void testAES() throws Exception{
+        String json = "{\n" +
+                "    \"version\": \"V1.0\",\n" +
+                "    \"seqnum\": 1,\n" +
+                "    \"from\": \"\",\n" +
+                "    \"to\": \"\",\n" +
+                "    \"type\": \"CWBS\",\n" +
+                "    \"number\": \"qazwsxedc\",\n" +
+                "    \"data\": {\n" +
+                "        \"name\": \"test33\",\n" +
+                "        \"password\": \"e10adc3949ba59abbe56e057f20f883e\",\n" +
+                "        \"nametype\": \"free\",\n" +
+                "        \"type\": \"android\"\n" +
+                "    }\n" +
+                "}";
+
+
     }
 }
