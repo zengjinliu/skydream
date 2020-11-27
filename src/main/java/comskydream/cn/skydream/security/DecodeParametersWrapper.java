@@ -106,7 +106,6 @@ public class DecodeParametersWrapper extends HttpServletRequestWrapper {
      *
      * @param string 原参数的值
      * @return 解密后的参数的值
-     * @auther minte
      * @date 2019/3/24 10:58
      */
 

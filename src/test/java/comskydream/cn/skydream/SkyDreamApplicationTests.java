@@ -1,7 +1,5 @@
 package comskydream.cn.skydream;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import comskydream.cn.skydream.aviator.example.SkyAviatorAsyncExecute;
 import comskydream.cn.skydream.component.MessageSendConfiguration;
 import comskydream.cn.skydream.component.OssConfiguration;
@@ -9,10 +7,9 @@ import comskydream.cn.skydream.converter.SysUserConverter;
 import comskydream.cn.skydream.entity.SysMenu;
 import comskydream.cn.skydream.entity.SysUser;
 import comskydream.cn.skydream.model.vo.SysUserVo;
-import comskydream.cn.skydream.security.AESECBUtil;
 import comskydream.cn.skydream.security.RSAKey;
 import comskydream.cn.skydream.security.RSAUtils;
-import comskydream.cn.skydream.service.sys.SysMenuService;
+import comskydream.cn.skydream.web.service.sys.SysMenuService;
 import comskydream.cn.skydream.utils.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
@@ -20,18 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-import java.awt.*;
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SkyDreamApplicationTests {

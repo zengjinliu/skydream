@@ -1,6 +1,6 @@
 package comskydream.cn.skydream.utils;
 
-import comskydream.cn.skydream.service.sys.SysUserService;
+import comskydream.cn.skydream.web.service.sys.SysUserService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

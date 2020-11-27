@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="comskydream.cn.skydream.mapper.SysMenuMapper">
+<mapper namespace="comskydream.cn.skydream.web.mapper.SysMenuMapper">
   <resultMap id="BaseResultMap" type="comskydream.cn.skydream.entity.SysMenu">
     <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
     <result column="parent_id" jdbcType="VARCHAR" property="parentId" />

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan("comskydream.cn.skydream.mapper")
+@MapperScan("comskydream.cn.skydream.web.mapper")
 public class SkyDreamApplication {
 
     public static void main(String[] args) {

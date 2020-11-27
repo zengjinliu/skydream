@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="comskydream.cn.skydream.mapper.SysCaptchaMapper">
+<mapper namespace="comskydream.cn.skydream.web.mapper.SysCaptchaMapper">
 
   <!--开启缓存-->
 <!--  <cache eviction="LRU"  type="cn.kiway.jyjh.common.cache.RedisMyBatisCache" flushInterval="6000" readOnly="false" size="1024"/>-->
@@ -26,14 +26,14 @@
     where uuid = #{uuid,jdbcType=CHAR}
   </delete>
 
-  <insert id="insert" parameterType="comskydream.cn.skydream.mapper.SysCaptchaMapper">
+  <insert id="insert" parameterType="comskydream.cn.skydream.web.mapper.SysCaptchaMapper">
     insert into sys_captcha (uuid, code, expire_time
       )
     values (#{uuid,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, #{expireTime,jdbcType=TIMESTAMP}
       )
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="comskydream.cn.skydream.mapper.SysCaptchaMapper">
+  <update id="updateByPrimaryKeySelective" parameterType="comskydream.cn.skydream.web.mapper.SysCaptchaMapper">
     update sys_captcha
     <set>
       <if test="code != null">

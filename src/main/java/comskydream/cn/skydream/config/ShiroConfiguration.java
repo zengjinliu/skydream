@@ -1,7 +1,7 @@
 package comskydream.cn.skydream.config;
 
-import comskydream.cn.skydream.auth.AuthRealm;
-import comskydream.cn.skydream.auth.ShiroFilter;
+import comskydream.cn.skydream.security.auth.AuthRealm;
+import comskydream.cn.skydream.security.auth.ShiroFilter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
