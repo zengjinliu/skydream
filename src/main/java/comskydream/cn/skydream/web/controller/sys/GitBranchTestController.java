@@ -13,7 +13,7 @@ public class GitBranchTestController {
 
 
 
-    @GetMapping("/hello")
+    @GetMapping("/hello1")
     public ResultJson hello(){
         return ResultJson.success();
     }
